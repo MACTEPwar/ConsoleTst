@@ -1,0 +1,7 @@
+C:\Users\v.shebanits\source\repos\ConsoleTst\ConsoleTst\bin\Debug\ConsoleTst.exe.config
+C:\Users\v.shebanits\source\repos\ConsoleTst\ConsoleTst\bin\Debug\ConsoleTst.exe
+C:\Users\v.shebanits\source\repos\ConsoleTst\ConsoleTst\bin\Debug\ConsoleTst.pdb
+C:\Users\v.shebanits\source\repos\ConsoleTst\ConsoleTst\obj\Debug\ConsoleTst.csprojAssemblyReference.cache
+C:\Users\v.shebanits\source\repos\ConsoleTst\ConsoleTst\obj\Debug\ConsoleTst.csproj.CoreCompileInputs.cache
+C:\Users\v.shebanits\source\repos\ConsoleTst\ConsoleTst\obj\Debug\ConsoleTst.exe
+C:\Users\v.shebanits\source\repos\ConsoleTst\ConsoleTst\obj\Debug\ConsoleTst.pdb
