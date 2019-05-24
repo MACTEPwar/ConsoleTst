@@ -1,0 +1,7 @@
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\bin\Debug\Broker.exe.config
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\bin\Debug\Broker.exe
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\bin\Debug\Broker.pdb
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\obj\Debug\Broker.csproj.CoreCompileInputs.cache
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\obj\Debug\Broker.exe
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\obj\Debug\Broker.pdb
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\obj\Debug\Broker.csprojAssemblyReference.cache
