@@ -49,5 +49,19 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Client\Client.csproj">
+      <Project>{20a0fa57-a789-4a2a-9047-8a6885ba3d18}</Project>
+      <Name>Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ConsoleTst\ConsoleTst.csproj">
+      <Project>{aea428c7-ea94-4391-b55b-b42617f2655b}</Project>
+      <Name>ConsoleTst</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Server\Server.csproj">
+      <Project>{49b83e2a-5d65-49c2-91e9-d223199244a7}</Project>
+      <Name>Server</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

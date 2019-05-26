@@ -8,3 +8,17 @@ C:\Users\v.shebanits\source\repos\ConsoleTst\Client\obj\Debug\Client.csproj.Gene
 C:\Users\v.shebanits\source\repos\ConsoleTst\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
 C:\Users\v.shebanits\source\repos\ConsoleTst\Client\obj\Debug\Client.exe
 C:\Users\v.shebanits\source\repos\ConsoleTst\Client\obj\Debug\Client.pdb
+C:\Users\Виталий\source\repos\ConsoleTst\Client\bin\Debug\Client.exe.config
+C:\Users\Виталий\source\repos\ConsoleTst\Client\bin\Debug\Client.exe
+C:\Users\Виталий\source\repos\ConsoleTst\Client\bin\Debug\Client.pdb
+C:\Users\Виталий\source\repos\ConsoleTst\Client\obj\Debug\Client.csprojAssemblyReference.cache
+C:\Users\Виталий\source\repos\ConsoleTst\Client\obj\Debug\Client.Form1.resources
+C:\Users\Виталий\source\repos\ConsoleTst\Client\obj\Debug\Client.Properties.Resources.resources
+C:\Users\Виталий\source\repos\ConsoleTst\Client\obj\Debug\Client.csproj.GenerateResource.cache
+C:\Users\Виталий\source\repos\ConsoleTst\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
+C:\Users\Виталий\source\repos\ConsoleTst\Client\obj\Debug\Client.exe
+C:\Users\Виталий\source\repos\ConsoleTst\Client\obj\Debug\Client.pdb
+C:\Users\Виталий\source\repos\ConsoleTst\Client\bin\Debug\ConsoleTst.exe
+C:\Users\Виталий\source\repos\ConsoleTst\Client\bin\Debug\ConsoleTst.pdb
+C:\Users\Виталий\source\repos\ConsoleTst\Client\bin\Debug\ConsoleTst.exe.config
+C:\Users\Виталий\source\repos\ConsoleTst\Client\obj\Debug\Client.csproj.CopyComplete

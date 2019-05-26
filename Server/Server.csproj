@@ -76,5 +76,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConsoleTst\ConsoleTst.csproj">
+      <Project>{aea428c7-ea94-4391-b55b-b42617f2655b}</Project>
+      <Name>ConsoleTst</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

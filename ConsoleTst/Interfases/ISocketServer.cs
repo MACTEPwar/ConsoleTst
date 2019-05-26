@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleTst.Interfases
 {
-    public interface IFunctionService
+    public interface ISocketServer
     {
-        // Выводит в консоль все локальные ip и MAC адреса
-        void GetIpNetARPTable();
+        void Start(int port);
+        void Stop();
+        void setMesaage(string message);
+        string getMesaage();
     }
 }

@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +41,7 @@ namespace ConsoleTst.Services
         public int dwType;
     }
 
-    class FunctionService : IFunctionService
+    public class FunctionService : IFunctionService
     {
         [DllImport("IpHlpApi.dll")]
         [return: MarshalAs(UnmanagedType.U4)]

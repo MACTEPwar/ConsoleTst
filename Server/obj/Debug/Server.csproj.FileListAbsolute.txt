@@ -1,0 +1,13 @@
+C:\Users\Виталий\source\repos\ConsoleTst\Server\bin\Debug\Server.exe.config
+C:\Users\Виталий\source\repos\ConsoleTst\Server\bin\Debug\Server.exe
+C:\Users\Виталий\source\repos\ConsoleTst\Server\bin\Debug\Server.pdb
+C:\Users\Виталий\source\repos\ConsoleTst\Server\bin\Debug\ConsoleTst.exe
+C:\Users\Виталий\source\repos\ConsoleTst\Server\bin\Debug\ConsoleTst.pdb
+C:\Users\Виталий\source\repos\ConsoleTst\Server\bin\Debug\ConsoleTst.exe.config
+C:\Users\Виталий\source\repos\ConsoleTst\Server\obj\Debug\Server.csprojAssemblyReference.cache
+C:\Users\Виталий\source\repos\ConsoleTst\Server\obj\Debug\Server.Properties.Resources.resources
+C:\Users\Виталий\source\repos\ConsoleTst\Server\obj\Debug\Server.csproj.GenerateResource.cache
+C:\Users\Виталий\source\repos\ConsoleTst\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+C:\Users\Виталий\source\repos\ConsoleTst\Server\obj\Debug\Server.csproj.CopyComplete
+C:\Users\Виталий\source\repos\ConsoleTst\Server\obj\Debug\Server.exe
+C:\Users\Виталий\source\repos\ConsoleTst\Server\obj\Debug\Server.pdb
