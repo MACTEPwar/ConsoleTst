@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ConsoleTst.Services;
 using ConsoleTst.Interfases;
+using Broker.Infrastructure;
 
 namespace Broker
 {
@@ -16,7 +17,9 @@ namespace Broker
 
         static void Main(string[] args)
         {
-            sockSevice.Start(8005);
+            //sockSevice.Start(8005);
+            SocketAsync.StartListening();
+            
         }
     }
 }

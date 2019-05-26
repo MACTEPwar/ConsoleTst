@@ -44,22 +44,28 @@ namespace ConsoleTst.Infrastructure
                     int bytes = 0; // количество полученных байтов
                     byte[] data = new byte[256]; // буфер для получаемых данных
 
-                    do
+                    while (true)
                     {
-                        bytes = handler.Receive(data);
-                        builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+
+
+                        do
+                        {
+                            bytes = handler.Receive(data);
+                            builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                        }
+                        while (handler.Available > 0);
+
+                        Console.WriteLine(DateTime.Now.ToShortTimeString() + ": " + builder.ToString());
+
+
+                        // отправляем ответ
+                        //string message = message;
+                        data = Encoding.Unicode.GetBytes(message);
+                        handler.Send(data);
                     }
-                    while (handler.Available > 0);
-
-                    Console.WriteLine(DateTime.Now.ToShortTimeString() + ": " + builder.ToString());
-
-                    // отправляем ответ
-                    //string message = message;
-                    data = Encoding.Unicode.GetBytes(message);
-                    handler.Send(data);
                     // закрываем сокет
-                    handler.Shutdown(SocketShutdown.Both);
-                    handler.Close();
+                    //handler.Shutdown(SocketShutdown.Both);
+                    //handler.Close();
                 }
             }
             catch (Exception ex)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,42 +28,21 @@ namespace Client
             init(port, "127.0.0.1");
         }
 
+        MySocket s;
+
         void init(int port, string address)
         {
-            try
+            s = new MySocket(address, port);
+            s.Connect();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string comand = textBox3.Text;
+            if (s != null)
             {
-                IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(address), port);
-
-                Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                // подключаемся к удаленному хосту
-                socket.Connect(ipPoint);
-                //Console.Write("Введите сообщение:");
-                string message = "asddfgrqw rdsf dsf sdf ";
-                byte[] data = Encoding.Unicode.GetBytes(message);
-                socket.Send(data);
-
-                // получаем ответ
-                data = new byte[256]; // буфер для ответа
-                StringBuilder builder = new StringBuilder();
-                int bytes = 0; // количество полученных байт
-
-                do
-                {
-                    bytes = socket.Receive(data, data.Length, 0);
-                    builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
-                }
-                while (socket.Available > 0);
-                MessageBox.Show("ответ сервера: " + builder.ToString());
-
-                // закрываем сокет
-                socket.Shutdown(SocketShutdown.Both);
-                socket.Close();
+                MessageBox.Show(s.Send(comand));
             }
-            catch (Exception ex)
-            {
-                //Console.WriteLine(ex.Message);
-            }
-            //Console.Read();
         }
     }
 }
