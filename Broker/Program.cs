@@ -1,24 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using ConsoleTst.Services;
-using ConsoleTst.Interfases;
-using Broker.Infrastructure;
+﻿using ConsoleTst.Infrastructure;
 
 namespace Broker
 {
     public class Program
     {
-        static ISocketServer sockSevice = new SocketServerService();
+        static SocketServer server = new SocketServer(8005);
 
         static void Main(string[] args)
         {
-            //sockSevice.Start(8005);
-            SocketAsync.StartListening();
+            server.Start();
+            //SocketAsync.StartListening();
             
         }
     }

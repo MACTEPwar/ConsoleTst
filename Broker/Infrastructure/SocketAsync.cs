@@ -11,15 +11,16 @@ namespace Broker.Infrastructure
 {
     public class StateObject
     {
-        // Client  socket.  
+        // сокет-клиент 
         public Socket workSocket = null;
-        // Size of receive buffer.  
+        // размер буфера.  
         public const int BufferSize = 1024;
-        // Receive buffer.  
+        // буфер для получателя
         public byte[] buffer = new byte[BufferSize];
-        // Received data string.  
+        // полученная информация 
         public StringBuilder sb = new StringBuilder();
     }
+
 
     public class SocketAsync
     {
@@ -28,15 +29,13 @@ namespace Broker.Infrastructure
 
         public static void StartListening()
         {
-            //IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
-            IPAddress ipAddress = IPAddress.Parse("127.0.0.1");//ipHostInfo.AddressList[0];
+            IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 8005);
 
-            // Create a TCP/IP socket.  
-            Socket listener = new Socket(ipAddress.AddressFamily,
-                SocketType.Stream, ProtocolType.Tcp);
+            // Создаю сокет  
+            Socket listener = new Socket(ipAddress.AddressFamily,SocketType.Stream, ProtocolType.Tcp);
 
-            // Bind the socket to the local endpoint and listen for incoming connections.  
+            // привязываю socket к локальному endpoint и слушаю  
             try
             {
                 listener.Bind(localEndPoint);
@@ -44,17 +43,19 @@ namespace Broker.Infrastructure
 
                 while (true)
                 {
-                    // Set the event to nonsignaled state.  
+                    // Устанавливаю в выключенное состояние 
                     allDone.Reset();
 
-                    // Start an asynchronous socket to listen for connections.  
+                    
+                    // Начинаю ассинхронное прослоушивание 
                     Console.WriteLine("Waiting for a connection...");
                     listener.BeginAccept(
                         new AsyncCallback(AcceptCallback),
                         listener);
 
-                    // Wait until a connection is made before continuing.  
+                    // ожидаю подключение
                     allDone.WaitOne();
+
                 }
 
             }
@@ -70,66 +71,66 @@ namespace Broker.Infrastructure
 
         public static void AcceptCallback(IAsyncResult ar)
         {
-            // Signal the main thread to continue.  
+            // даю сигнал главному потоку для продолжения работы
             allDone.Set();
 
-            // Get the socket that handles the client request.  
+            // получаю сокет, который обрабатывает запрос клиента
             Socket listener = (Socket)ar.AsyncState;
             Socket handler = listener.EndAccept(ar);
 
-            // Create the state object.  
+            // создаю объект состояния 
             StateObject state = new StateObject();
             state.workSocket = handler;
+            
             handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
                 new AsyncCallback(ReadCallback), state);
         }
 
         public static void ReadCallback(IAsyncResult ar)
         {
-            String content = String.Empty;
-
-            // Retrieve the state object and the handler socket  
-            // from the asynchronous state object.  
-            StateObject state = (StateObject)ar.AsyncState;
-            Socket handler = state.workSocket;
-
-            // Read data from the client socket.   
-            int bytesRead = handler.EndReceive(ar);
-
-            if (bytesRead > 0)
+           // while (true)
             {
-                // There  might be more data, so store the data received so far.  
-                state.sb.Append(Encoding.ASCII.GetString(
-                    state.buffer, 0, bytesRead));
+                String content = String.Empty;
 
-                // Check for end-of-file tag. If it is not there, read   
-                // more data.  
-                content = state.sb.ToString();
-                //if (content.IndexOf("<EOF>") > -1)
-                if (content.Length > 0)
+                //Получаю состояние и сокет-обработчик 
+                StateObject state = (StateObject)ar.AsyncState;
+                Socket handler = state.workSocket;
+
+                // Считываю данные из  сокета-клиента 
+                int bytesRead = handler.EndReceive(ar);
+
+                if (bytesRead > 0)
                 {
-                    // All the data has been read from the   
-                    // client. Display it on the console.  
-                    Console.WriteLine("Read {0} bytes from socket. \n Data : {1}",
-                        content.Length, content);
-                    // Echo the data back to the client.  
-                    Send(handler, content);
-                }
-                else
-                {
-                    // Not all data received. Get more.  
-                    handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
-                    new AsyncCallback(ReadCallback), state);
+                    // сохраняю полученные данные.  
+                    state.sb.Append(Encoding.ASCII.GetString(state.buffer, 0, bytesRead));
+
+                    // проверяю всю ли инфу я считал 
+                    content = state.sb.ToString();
+                    //if (content.IndexOf("<EOF>") > -1)
+                    if (content.Length > 0)
+                    {
+                        // записую на сервере
+                        Console.WriteLine("Read {0} bytes from socket. \n Data : {1}",
+                            content.Length, content);
+                        // шлю клиенту
+                        Send(handler, content);
+                    }
+                    else
+                    {
+                        // если считано не все  
+                        handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
+                        new AsyncCallback(ReadCallback), state);
+                    }
                 }
             }
+            
         }
 
         private static void Send(Socket handler, String data)
         {
-            // Convert the string data to byte data using ASCII encoding.  
             byte[] byteData = Encoding.ASCII.GetBytes(data);
 
-            // Begin sending the data to the remote device.  
+            // передаю
             handler.BeginSend(byteData, 0, byteData.Length, 0,
                 new AsyncCallback(SendCallback), handler);
         }
@@ -138,15 +139,15 @@ namespace Broker.Infrastructure
         {
             try
             {
-                // Retrieve the socket from the state object.  
+                // получаю сокет из объекта состояния.  
                 Socket handler = (Socket)ar.AsyncState;
 
-                // Complete sending the data to the remote device.  
+                // завершаю передачу данных на удаленное устройство 
                 int bytesSent = handler.EndSend(ar);
                 Console.WriteLine("Sent {0} bytes to client.", bytesSent);
 
-                handler.Shutdown(SocketShutdown.Both);
-                handler.Close();
+                //handler.Shutdown(SocketShutdown.Both);
+                //handler.Close();
 
             }
             catch (Exception e)
