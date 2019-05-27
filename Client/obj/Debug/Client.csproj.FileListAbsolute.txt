@@ -22,3 +22,7 @@ C:\Users\Виталий\source\repos\ConsoleTst\Client\bin\Debug\ConsoleTst.exe
 C:\Users\Виталий\source\repos\ConsoleTst\Client\bin\Debug\ConsoleTst.pdb
 C:\Users\Виталий\source\repos\ConsoleTst\Client\bin\Debug\ConsoleTst.exe.config
 C:\Users\Виталий\source\repos\ConsoleTst\Client\obj\Debug\Client.csproj.CopyComplete
+C:\Users\v.shebanits\source\repos\ConsoleTst\Client\bin\Debug\ConsoleTst.exe
+C:\Users\v.shebanits\source\repos\ConsoleTst\Client\bin\Debug\ConsoleTst.pdb
+C:\Users\v.shebanits\source\repos\ConsoleTst\Client\bin\Debug\ConsoleTst.exe.config
+C:\Users\v.shebanits\source\repos\ConsoleTst\Client\obj\Debug\Client.csproj.CopyComplete

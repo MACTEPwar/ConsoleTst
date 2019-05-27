@@ -22,3 +22,13 @@ C:\Users\Виталий\source\repos\ConsoleTst\Broker\bin\Debug\ConsoleTst.exe.
 C:\Users\Виталий\source\repos\ConsoleTst\Broker\bin\Debug\Server.pdb
 C:\Users\Виталий\source\repos\ConsoleTst\Broker\bin\Debug\Server.exe.config
 C:\Users\Виталий\source\repos\ConsoleTst\Broker\obj\Debug\Broker.csproj.CopyComplete
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\bin\Debug\Client.exe
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\bin\Debug\ConsoleTst.exe
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\bin\Debug\Server.exe
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\bin\Debug\Client.pdb
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\bin\Debug\Client.exe.config
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\bin\Debug\ConsoleTst.pdb
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\bin\Debug\ConsoleTst.exe.config
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\bin\Debug\Server.pdb
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\bin\Debug\Server.exe.config
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\obj\Debug\Broker.csproj.CopyComplete
