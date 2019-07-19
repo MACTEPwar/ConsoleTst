@@ -27,6 +27,7 @@ namespace ConsoleTst
 
     class Program
     {
+        
         //public static List<string> splt(string str, int sep)
         //{
         //    List<string> res = new List<string>();
@@ -75,11 +76,13 @@ namespace ConsoleTst
 
         public static void Write(string text)
         {
-            text = DateTime.Now.ToString() + "\t" + text + Environment.NewLine;
-            FileStream fstream = new FileStream(@"D:\Logs.txt", FileMode.Append);
-            byte[] array = System.Text.Encoding.Default.GetBytes(text);
-            fstream.Write(array, 0, array.Length);
-            fstream.Close();
+            Console.Write("asd123");
+
+            //text = DateTime.Now.ToString() + "\t" + text + Environment.NewLine;
+            //FileStream fstream = new FileStream(@"D:\Logs.txt", FileMode.Append);
+            //byte[] array = System.Text.Encoding.Default.GetBytes(text);
+            //fstream.Write(array, 0, array.Length);
+            //fstream.Close();
         }
 
         public static string fffff(int t)
