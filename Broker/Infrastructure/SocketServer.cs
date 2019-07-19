@@ -47,9 +47,10 @@ namespace ConsoleTst.Infrastructure
 
                 while (true)
                 {
+                    handler = listenSocket.Accept();
                     new Thread(() =>
                     {
-                        handler = listenSocket.Accept();
+                        
                         clients.Add(handler);
                         // получаем сообщение
                         StringBuilder builder = new StringBuilder();
@@ -95,10 +96,48 @@ namespace ConsoleTst.Infrastructure
 
         public string DoFunction(string comand)
         {
-            List<Comand> comands = new List<Comand>();
+            ComandPull comands = new ComandPull();
             comand.Split('\n').ToList().ForEach(cmd => comands.Add(new Comand(cmd)));
+            return comands.ExecutePull();
+        }
+    }
+
+    public class ComandPull
+    {
+        private List<Comand> comands;
+
+        public ComandPull()
+        {
+            comands = new List<Comand>();
+        }
+
+        public void Add(Comand cmd)
+        {
+            comands.Add(cmd);
+        }
+
+        public void Clear()
+        {
+            comands.Clear();
+        }
+
+        public string ExecutePull()
+        {
+            var response = string.Empty;
+            if (comands.Count > 0)
+            {
+                foreach (Comand cmd in comands)
+                {
+                    response += ExecuteComand(cmd);
+                }
+            }
+            return response;
+        }
+
+        private string ExecuteComand(Comand cmd)
+        {
             IFunctionService service = new FunctionService();
-            MethodInfo method = service.GetType().GetMethod(comand);
+            MethodInfo method = service.GetType().GetMethod(cmd.ComandTitle);
             if (method == null) return "Такого метода нет";
             return method.Invoke(service, null).ToString();
         }
@@ -106,8 +145,8 @@ namespace ConsoleTst.Infrastructure
 
     public class Comand
     {
-        string ComandTitle { get; set; }
-        Dictionary<string, string> Arguments = new Dictionary<string, string>();
+        public string ComandTitle { get; set; }
+        public Dictionary<string, string> Arguments = new Dictionary<string, string>();
         public Comand(string cmd)
         {
             Regex r = new Regex(@"\s+");

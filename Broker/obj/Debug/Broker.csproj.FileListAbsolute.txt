@@ -32,3 +32,6 @@ C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\bin\Debug\ConsoleTst.exe.con
 C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\bin\Debug\Server.pdb
 C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\bin\Debug\Server.exe.config
 C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\obj\Debug\Broker.csproj.CopyComplete
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\bin\Debug\PrintDriverNet.dll
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\bin\Debug\PrintDriverNet.pdb
+C:\Users\v.shebanits\source\repos\ConsoleTst\Broker\bin\Debug\PrintDriverNet.xml

@@ -26,3 +26,6 @@ C:\Users\v.shebanits\source\repos\ConsoleTst\Client\bin\Debug\ConsoleTst.exe
 C:\Users\v.shebanits\source\repos\ConsoleTst\Client\bin\Debug\ConsoleTst.pdb
 C:\Users\v.shebanits\source\repos\ConsoleTst\Client\bin\Debug\ConsoleTst.exe.config
 C:\Users\v.shebanits\source\repos\ConsoleTst\Client\obj\Debug\Client.csproj.CopyComplete
+C:\Users\v.shebanits\source\repos\ConsoleTst\Client\bin\Debug\PrintDriverNet.dll
+C:\Users\v.shebanits\source\repos\ConsoleTst\Client\bin\Debug\PrintDriverNet.pdb
+C:\Users\v.shebanits\source\repos\ConsoleTst\Client\bin\Debug\PrintDriverNet.xml
