@@ -97,7 +97,7 @@ namespace ConsoleTst
 
         static void Main(string[] args)
         {
-            Console.Write("HELP!!!");
+            Console.Write("NO HELP!!!");
 
             var method = typeof(List<int>).GetMethod("Contains", new Type[] { typeof(int) });
             // Func<string> fnc = () => fffff("asd");
