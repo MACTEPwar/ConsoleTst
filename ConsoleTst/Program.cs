@@ -77,6 +77,8 @@ namespace ConsoleTst
         public static void Write(string text)
         {
             Console.Write("asd123");
+            int s = 0;
+            int k = 123;
 
             //text = DateTime.Now.ToString() + "\t" + text + Environment.NewLine;
             //FileStream fstream = new FileStream(@"D:\Logs.txt", FileMode.Append);
