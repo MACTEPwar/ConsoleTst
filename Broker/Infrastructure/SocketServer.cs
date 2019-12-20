@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -46,7 +47,8 @@ namespace ConsoleTst.Infrastructure
 
                 while (true)
                 {
-                    new Thread(() => {
+                    new Thread(() =>
+                    {
                         handler = listenSocket.Accept();
                         clients.Add(handler);
                         // получаем сообщение
@@ -56,6 +58,9 @@ namespace ConsoleTst.Infrastructure
 
                         while (true)
                         {
+                            //Array.Clear(data, 0, data.Length);
+                            //data = new byte[256];
+                            builder.Clear();
                             do
                             {
                                 bytes = handler.Receive(data);
@@ -64,17 +69,16 @@ namespace ConsoleTst.Infrastructure
                             while (handler.Available > 0);
 
                             //Console.WriteLine(DateTime.Now.ToShortTimeString() + ": " + builder.ToString());
-                            
+
 
                             // отправляем ответ
-                            //string message = message;
                             data = Encoding.Unicode.GetBytes(DoFunction(builder.ToString()));
                             handler.Send(data);
                         }
                     }).Start();
-                    
+
                     // закрываем сокет
-                    
+
                 }
             }
             catch (Exception ex)
@@ -91,10 +95,45 @@ namespace ConsoleTst.Infrastructure
 
         public string DoFunction(string comand)
         {
+            List<Comand> comands = new List<Comand>();
+            comand.Split('\n').ToList().ForEach(cmd => comands.Add(new Comand(cmd)));
             IFunctionService service = new FunctionService();
             MethodInfo method = service.GetType().GetMethod(comand);
             if (method == null) return "Такого метода нет";
             return method.Invoke(service, null).ToString();
+        }
+    }
+
+    public class Comand
+    {
+        string ComandTitle { get; set; }
+        Dictionary<string, string> Arguments = new Dictionary<string, string>();
+        public Comand(string cmd)
+        {
+            Regex r = new Regex(@"\s+");
+            string trims = r.Replace(cmd, @" ").Trim();
+            var args = trims.Split(' ');
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i].Length > 0)
+                {
+                    if (i == 0) ComandTitle = args[i];
+                    if (args[i][0] == '-')
+                    {
+                        if (i != args.Length - 1)
+                        {
+                            if (args[i + 1][0] != '-')
+                            {
+                                Arguments.Add(args[i], args[i + 1]);
+                            }
+                            else
+                            {
+                                Arguments.Add(args[i], null);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
