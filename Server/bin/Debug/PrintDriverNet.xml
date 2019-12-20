@@ -1,0 +1,2132 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PrintDriverNet</name>
+    </assembly>
+    <members>
+        <member name="T:PrintDriverNet.Printer">
+            <summary>
+            Define wrapper class for using printer driver library.
+            Printer driver library component for printer manifactured
+            by Datecs Ltd.
+            </summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.SUPPORTED_VERSION">
+            <summary>
+            Supported printer driver library version.
+            </summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ENONE">
+            <summary>Successful result.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EGENERAL">
+            <summary>General error.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ENOIMPLEMENTED">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EINTERRUPTED">
+            <summary>Interrupted.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBUSY">
+            <summary>Busy.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EMEMORY">
+            <summary>Memory allocation problem.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ETIMEOUT">
+            <summary>Timeout.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EINVALIDPARAMS">
+            <summary>Invalid parameters.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EFAILED">
+            <summary>Command failed.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PDSDK_PRINTERSTATUS_NOPAPER">
+            <summary>Printer is out of paper.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.MRPARAM_TRACK1">
+            <summary>Read Track 1.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.MRPARAM_TRACK2">
+            <summary>Read Track 2.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.MRPARAM_TRACK3">
+            <summary>Read Track 3.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.MRPARAM_ALLTRACKS">
+            <summary>All tracks.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.MRPARAM_PREFIX">
+            <summary>Delimited track data with 0xF1, 0xF2, and 0xF3.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.MRPARAM_RAW">
+            <summary>Return data in hex string.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.STATUS1_ERROR">
+            <summary>Error occur.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.STATUS1_BTNPRESSED">
+            <summary>Button is pressed.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.STATUS1_ANSWEROFBTN">
+            <summary>Auto answear.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.STATUS1_MULTIFRAME">
+            <summary>Part of multiframe.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.STATUS2_0K">
+            <summary>Successful.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.STATUS2_INVALIDCMD">
+            <summary>Invalid command.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.STATUS2_NOTPERMITED">
+            <summary>Not permited command.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.STATUS2_CARDERROR">
+            <summary>Card error.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.STATUS2_SYSTEMERROR">
+            <summary>System error.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.STATUS2_NORESPONCE">
+            <summary>No responce.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.STATUS2_COMMERROR">
+            <summary>Communication error.</summary>
+        </member>
+        <member name="M:PrintDriverNet.Printer.#ctor">
+            <summary>
+            Class constructor
+            </summary>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Dispose">
+            <summary>
+            Dispose method
+            </summary>
+        </member>
+        <member name="M:PrintDriverNet.Printer.LoadPrinterConfigDialog(System.IntPtr)">
+            <summary>
+            Load printer configuration dialog.
+            </summary>
+            <param name="handle">
+            Value that specify handle to the owner.
+            </param>
+            <returns>
+            This function always returns TRUE (1).
+            </returns>
+            <remarks>PrintConfig.cpl must be in device path to be able to execute that function.</remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.OpenPrinter">
+            <summary>
+            This function cause open connection with printer.
+            </summary>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error. 
+            </returns>
+            <remarks>
+            Call this function close any previous connection with printer. 
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.OpenPrinter(System.Boolean,System.String)">
+            <summary>
+            This function cause open connection with printer.
+            </summary>
+            <param name="bKernelMode">
+            Indicate to use printer driver in kernel mode. In this mode any 
+            call to printer shall pass via standard Windows printing API. It 
+            is not very recommended because in some cases unresolved kernel 
+            lock may occur.
+            </param>
+            <param name="strPrinterName">
+            Indicate which printer to use. Printer must have a valid registry 
+            record in [HKLM\Printers]. If value is NULL or empty string then 
+            default printer is used.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error. 
+            </returns>
+            <remarks>
+            Call this function close any previous connection with printer. 
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.OpenPrinter2(PrintDriverNet.Printer.PrinterSettings,System.String,System.String)">
+            <summary>
+            This function cause open connection with printer.
+            </summary>
+            <param name="printerSettings">
+            Reference to PrinterSettings structure.
+            </param>
+            <param name="strLogAddress">
+            Contains logical address used for connection. Some of the valid 
+            values are:
+                COM1:
+                COM1: 115200
+                .....
+                COM9:
+                BTH:
+                IRDA:
+            </param>
+            <param name="strExtraData">
+            Extra data that function expect depends of "strLogAddress"  parameter. 
+            For example if you use "BTH:" logical connection type you must supply 
+            bluetooth address of the remote device in TCHAR string format: 
+                "XX:XX:XX:XX:XX:XX", 
+            where XX if value from 0x00 to 0xFF.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error. 
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.ClosePrinter">
+            <summary>
+            This function cause close connection with printer.
+            </summary>
+            <returns>
+            If no error occurs, this function returns ENONE. If an error 
+            occurs, a negative value is returned. The particular return value 
+            depends on the type of error. 
+            </returns>
+            <remarks>
+            You must call it to free resources that PDSDK_OpenPrinter or 
+            PDSDK_OpenPrinter2 allocates.
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.IsActive">
+            <summary>
+            This function check for active connection with printer.
+            </summary>
+            <returns>
+            If you have active connection opened with printer this function 
+            returns true. In other case function returns false.
+            </returns>        
+        </member>
+        <member name="M:PrintDriverNet.Printer.ForceStop">
+            <summary>
+            This function cause stop and immediate exit from functions.
+            </summary>
+            <remarks>
+            You can use that function for immediate exit from PDSDK_ReadMagstripe,
+            PDSDK_ReadBarcode and etc.
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.FindFirstBthDevice(PrintDriverNet.Printer.BthInfoData@)">
+            <summary>
+            This function enumerate bluetooth device in range.
+            </summary>        
+            <param name="bthInfo">
+            Variable that receives bluetooth device information data.
+            </param>
+            <returns>
+            The return value can be equal to 0 if there are no more devices, 
+            greater then 0 if bluetooth device found, or less then 0 if there 
+            is an error. The particular return value depends on the type of error.
+            </returns>
+            <remarks>
+            This function must be call first to start searching.
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.FindNextBthDevice(PrintDriverNet.Printer.BthInfoData@)">
+            <summary>
+            This function continue to enumerate bluetooth device in range.
+            </summary>        
+            <param name="bthInfo">
+            Variable that receives bluetooth device information data.
+            </param>
+            <returns>
+            The return value can be equal to 0 if there are no more devices, 
+            greater then 0 if bluetooth device found, or less then 0 if there 
+            is an error. The particular return value depends on the type of error.
+            </returns>
+            <remarks>
+            This function must be call to continues searching.
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.FindClose">
+            <summary>
+            This function stops searching for bluetooth devices and free allocated data.
+            </summary>                
+            <returns>
+            The return value can be equal to 0 if there are no more devices, 
+            greater then 0 if bluetooth device found, or less then 0 if there 
+            is an error. The particular return value depends on the type of error.
+            </returns>        
+        </member>
+        <member name="M:PrintDriverNet.Printer.GetDC">
+            <summary>
+            This function retrieves a handle to a printer device context.
+            </summary>
+            <returns>
+            The return value is a handle to the device context if there are 
+            no errors and NULL if there is an error.
+            </returns>
+            <remarks>
+            You can use this device context with GDI functions to draw
+            into printer device bitmap.
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.WritePortDirect(System.Byte[],System.Int32)">
+            <summary>
+            This function cause write data direct to printer port.
+            </summary>
+            <param name="buffer">
+            Byte array buffer that contains data to be write.
+            </param>
+            <param name="nNumberOfBytesToWrite">
+            Value that specify length in bytes of data to be write.
+            </param>
+            <returns>
+            The return value is bytes that were successfully sent
+            to printer port if there are no errors and negative value 
+            if there is an error. The particular return value depends 
+            on the type of error.
+            </returns>
+            <remarks>
+            If printer is into protocol mode you must send and protocol 
+            header data.
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.ReadPortDirect(System.Byte[],System.Int32)">
+            <summary>
+            This function cause read data direct from printer port.
+            </summary>
+            <param name="buffer">
+            Byte array buffer that receives data. 
+            </param>
+            <param name="nNumberOfBytesToRead">
+            Value that specify the length in bytes of data to be read.
+            </param>
+            <returns>
+            The return value is bytes that were successfully received
+            from printer port if there are no errors and negative value
+            if there is an error. The particular return value depends
+            on the type of error.
+            </returns>
+            <remarks>
+            If printer is into protocol mode you shall receive
+            and protocol header data.
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.WritePrinterDirect(System.Byte[],System.Int32)">
+            <summary>
+            This function cause write data direct to printer.
+            </summary>
+            <param name="buffer">
+            Byte array buffer that constains data to be write.
+            </param>
+            <param name="nNumberOfBytesToWrite">
+            Value that specify the length in bytes of data to be write. 
+            </param>
+            <returns>
+            The return value is bytes that were successfully sent to printer
+            if there are no errors and negative value if there is an error. 
+            The particular return value depends on the type of error.
+            </returns>
+            <remarks>
+            If printer is into protocol mode this function send protocol
+            packet header data.
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Flush">
+            <summary>
+            This function wait until there is pending data in printer input buffer.
+            </summary>       
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+            <remarks>
+            You can use that function to ensure that printer can accept commands immediately.        
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.GetGraphicsPageSize(PrintDriverNet.Printer.Size@)">
+            <summary>
+            This function return graphics page dimentions.
+            </summary>
+            <param name="szPage">
+            SIZE structure that receives graphics page dimentions.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.StartDoc(System.String)">
+            <summary>
+            This function starts a graphics print job.
+            </summary>
+            <param name="strDocName">
+            Document name. 
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+            <remarks>
+            Driver does not require valid document name and don't
+            handle it.
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.EndDoc(System.Boolean)">
+            <summary>
+            This function ends a graphics print job.
+            </summary>
+            <param name="bAbort">
+            Parameter indicate to abort the current graphics print job.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>        
+        </member>
+        <member name="M:PrintDriverNet.Printer.StartPage">
+            <summary>
+            This function prepares the printer driver to accept graphics data.
+            </summary>        
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+            <remarks>
+            You must to call this function every time when you need to print
+            new graphics page. Dimentions of that page can be obtain with 
+            PDSDK_GetGraphicsPageSize. All data outside that dimentions
+            shall be discard.
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.EndPage">
+            <summary>
+            This function send graphics data to printer.
+            </summary>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>        
+        </member>
+        <member name="M:PrintDriverNet.Printer.SelfTest">
+            <summary>
+            This function cause print self test.
+            </summary>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.ReadIdentification(System.Byte[],System.Int32)">
+            <summary>
+            This function read printer identification string.
+            </summary>
+            <param name="buffer">
+            Byte array buffer that receives data. It must be 32 bytes long.      
+            </param>
+            <param name="nBufferSize">
+            Value that specify the size of buffer in bytes. 
+            </param>
+            <returns>
+            The return value is bytes that was successfully received
+            from printer if there are no errors and negative value 
+            if there is an error. The particular return value depends 
+            on the type of error.
+            </returns>
+            <remarks>
+            Data in range [0 .. 21] contains printer name.
+            Data in range [22 .. 26] contains printer firmware version.
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.ReadVoltageAndTemperature(System.Int32@,System.Int32@)">
+            <summary>
+            This function read printer battery voltage level and
+            temperature of head.
+            </summary>
+            <param name="nVoltage">
+            Variable that receives battery voltage level.
+            Voltage level must be devide by 10 to obtain value in volts.
+            </param>
+            <param name="nTemperature">
+            Variable that receives temperature of printer head.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>        
+        </member>
+        <member name="M:PrintDriverNet.Printer.ReadStatus(System.Int32@)">
+            <summary>
+            This function read printer status.
+            </summary>
+            <param name="nStatus">
+            <para>Variable that receives printer status.</para>         
+            <para><see cref="F:PrintDriverNet.Printer.PDSDK_PRINTERSTATUS_NOPAPER"></see></para>
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error. 
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.ReadSerialNumber(System.String@)">
+            <summary>
+            This functions read printer serial number.
+            </summary>
+            <param name="strSerialNumber">
+            Variable that receives printer serial number.
+            </param>
+            <returns>
+            The return value is bytes that was successfully received
+            from printer if there are no errors and negative value 
+            if there is an error. The particular return value depends 
+            on the type of error.
+            </returns>
+            <remarks>
+            PDSDK_ReadSerialNumber is left only for compatibility with 
+            old firmware (DATECS PP55 with firmware less then 1.40). 
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.ReadSerialNumberEx(System.String@)">
+            <summary>
+            This functions read printer serial number.
+            </summary>
+            <param name="strSerialNumber">
+            Variable that receives printer serial number.
+            </param>
+            <returns>
+            The return value is bytes that was successfully received
+            from printer if there are no errors and negative value 
+            if there is an error. The particular return value depends 
+            on the type of error.
+            </returns>        
+        </member>
+        <member name="M:PrintDriverNet.Printer.PrintTaggedText(System.Byte[],System.Int32)">
+            <summary>
+            This function cause print text.
+            </summary>
+            <param name="buffer">
+            Byte array buffer that contains text data. 
+            <para> </para>
+            <para>You can insert tags into text to change its parameters.</para>
+            <para>Valid tags are:</para>
+            <para>    [BEL]     - Bel.</para>
+            <para>    [HT]      - Horizontal tab.</para>
+            <para>    [LF]      - Line feed.</para>
+            <para>    [U+]      - Start underline.</para>
+            <para>    [U-]      - End underline.</para>
+            <para>    [I+]      - Start italic.</para>
+            <para>    [I-]      - End italic.</para>
+            <para>    [B+]      - Start highlight.</para>
+            <para>    [B-]      - End highlight.</para>
+            <para>    [FI]      - Select internal fontset.</para>
+            <para>    [FL]      - Select loadable fontset.</para>
+            <para>    [FA]      - Select font A.</para>
+            <para>    [FB]      - Select font B.</para>
+            <para>    [DW+]     - Start double width text.</para>
+            <para>    [DW-]     - End double width text.</para>
+            <para>    [DH+]     - Start double height text.</para>
+            <para>    [DH-]     - End double height text.</para>
+            <para>    [FV+]     - Flip chars vertical.</para>
+            <para>    [FV-]     - End flip chars vertical.</para>
+            <para>    [RC+]     - Start rotate characters right (90 degrees).</para>
+            <para>    [RC-]     - End rotate characters right (90 degrees).</para>
+            <para>    [ILxxx]   - Set intensity level: IL70, IL80, IL90, IL100, IL120, IL150.</para>
+            <para>    [LEFT]	- Align text to left. Valid only to next new line.</para>
+            <para>    [CENTER]	- Align text to center. Valid only to next new line.</para>
+            <para>    [RIGHT]	- Align text to right. Valid only to next new line.</para>
+            </param>        
+            <param name="nBufferSize">
+            Value that specify the size of buffer in bytes. 
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error. 
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.ReadMagstripe(System.Int32,System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            This function read magnetic card.
+            </summary>
+            <param name="nTimeout">
+            Value that specify timeout of operation.
+            </param>
+            <param name="nParams">
+            Value that specify parameters for reading magstripe.
+            </param>
+            <param name="buffer">
+            Byte array buffer that receives magstripe data.        
+            </param>
+            <param name="nBufferSize">
+            Value that specify the size of buffer in bytes.
+            </param>        
+            <returns>
+            The return value is bytes that was successfully received
+            from printer if there are no errors and negative value 
+            if there is an error. The particular return value depends 
+            on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.ReadPaymentCard(System.Int32,System.Int32,PrintDriverNet.Printer.PaymentCard@)">
+            <summary>
+            This function read payment card.
+            </summary>
+            <param name="nTimeout">
+            Value that specify timeout of operation.
+            </param>
+            <param name="nParams">
+            Value that specify parameters for reading magstripe.
+            </param>
+            <param name="paymentCard">
+            Variable that receives payment card data. Before calling 
+            function structure must be filled to specify which tracks to read.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.ReadBarcode(System.Int32,System.Byte[],System.Int32,System.String@)">
+            <summary>
+            This function read barcode.
+            </summary>
+            <param name="nTimeout">
+            Value that specify timeout of operation.
+            </param>
+            <param name="buffer">
+            Byte array buffer that receives barcode data.
+            </param>
+            <param name="nBufferSize">
+            Value that specify the size of buffer in bytes.
+            </param>
+            <param name="strBarcodeName">
+            Variable that receives barcode name.
+            </param>
+            <returns>
+            The return value is bytes that was successfully received
+            from printer if there are no errors and negative value 
+            if there is an error. The particular return value depends 
+            on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.PrintBarcode(PrintDriverNet.Printer.PrintBarcodeParams,System.Byte[],System.Int32)">
+            <summary>
+            This function cause print barcode.
+            </summary>
+            <param name="properties">
+            Structure that specify parameters of printed barcode.
+            </param>
+            <param name="buffer">
+            Byte array buffer that contains barcode data.
+            </param>
+            <param name="nBarcodeDataLength">
+            Value that specify the barcode data length in bytes.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error. 
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.ReadBarcodeSettings(System.UInt32[],System.Int32)">
+            <summary>
+            This function read barcode reader settings.
+            </summary>
+            <param name="buffer">
+            UInt32 array buffer that contains requested barcode paramer. 
+            The elements of that must be thread as multiples of two UInt32 
+            values - one for parameter and next for value.
+            </param>
+            <param name="nNodes">
+            Value that specify how many couples of UInt32 are pointed by the 
+            first parameter.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.WriteBarcodeSettings(System.UInt32[],System.Int32)">
+            <summary>
+            This function write barcode reader settings.
+            </summary>
+            <param name="buffer">
+            UInt32 array buffer that contains requested barcode paramer. 
+            The elements of that must be thread as multiples of two UInt32 
+            values - one for parameter and next for value.
+            </param>
+            <param name="nNodes">
+            Value that specify how many couples of UInt32 are pointed by the 
+            first parameter.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.TurnOff">
+            <summary>
+            This function cause turn off printer.
+            </summary>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+            <remarks>
+            This function make a call to PDSDK_ClosePrinter.
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.PaperFeed(System.Int32)">
+            <summary>
+            This function cause paper feed.
+            </summary>
+            <param name="nLines">
+            Value that specify how many pixels to feed paper.
+            Eigth pixels are one millimeter (203 DPI).
+            If value is 0 then paper is feed from printer head to the cutter.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.PrintLogo(PrintDriverNet.Printer.ELogoParams)">
+            <summary>
+            This function cause logo printing.
+            </summary>
+            <param name="logoParams">
+            Value that specify logo parameter.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.LoadLogoFromBitmap(System.IntPtr)">
+            <summary>
+            This function cause logo loading into printer.
+            </summary>
+            <param name="hLogoImage">
+            Value that specify handle to bitmap that contains logo.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.SetLineFeedRate(System.Int32)">
+            <summary>
+            This function set line feed rate of minimum pitch.
+            </summary>
+            <param name="nLines">
+            Value that specify the line feed rate 
+            per line is specified by n/203 inch. If value is 0 then function
+            set default line feed rate per line is specified by 1/6 inch.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.BMMCalibration">
+            <summary>
+            This function do black mark mode calibration.  
+            </summary>        
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+            <remarks>
+            The printer moves approximately 20 cm of paper and searches minimum 
+            and maximum of paper sensor values. Then a reasonable value of the ADC threshold is 
+            calculated and stored in flash memory.
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.PrintBitmap(System.IntPtr,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            This function print bitmap.
+            </summary>
+            <param name="hBitmap">Specifies handle to bitmap.</param>
+            <param name="nDstX">Specifies the x-coordinate, in pixels, of the upper left corner of the destination rectangle.</param>
+            <param name="nDstY">Specifies the y-coordinate, in pixels, of the upper left corner of the destination rectangle.</param>
+            <param name="nDstWidth">Specifies the width, in pixels, of the destination rectangle.</param>
+            <param name="nDstHeight">Specifies the height, in pixels, of the destination rectangle.</param>
+            <param name="nSrcX">Specifies the x-coordinate, in pixels, of the upper left corner of the source rectangle.</param>
+            <param name="nSrcY">Specifies the y-coordinate, in pixels, of the upper left corner of the source rectangle.</param>
+            <param name="nSrcWidth">Specifies the width, in pixels, of the source rectangle.</param>
+            <param name="nSrcHeight">Specifies the height, in pixels, of the source rectangle.</param>
+            <returns>
+            If no error occurs, this function returns PDSDK_ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error. 
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.SelectCodetable(PrintDriverNet.Printer.ECodeTable)">
+            <summary>
+            This function select code table.
+            </summary>
+            <param name="codetable">
+            Specify code table.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.SetLabel(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            This function set the length of label.
+            </summary>
+            <param name="nLength">Length of the printing area.</param>
+            <param name="nGap">Length of gap between labels.</param>
+            <param name="nFeed">Feed amount for the beginning of a line after label feed.</param>
+            <param name="nBackward">Feed back amount before the beginning of printing.</param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.LabelFeed">
+            <summary>
+            This function feed label.
+            </summary>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.OpenChannel(PrintDriverNet.Printer.EChannels)">
+            <summary>
+            This function cause open channel with external module.
+            </summary>
+            <param name="channel">
+            Value that specify the channel.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.CloseChannel(PrintDriverNet.Printer.EChannels)">
+            <summary>
+            This function cause close channel with external module.
+            </summary>
+            <param name="channel">
+            Value that specify the channel.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+            <remarks>
+            Printer channel can not be closed.
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.SendToChannel(PrintDriverNet.Printer.EChannels,System.Byte[],System.Int32)">
+            <summary>
+            This function cause sending data from specific channel.
+            </summary>
+            <param name="channel">
+            Value that specify the channel.
+            </param>
+            <param name="buffer">
+            Byte array buffer that contains data to be send.
+            </param>
+            <param name="nNumberOfBytesToSend">
+            Value that specify number of bytes to be send.
+            </param>
+            <returns>
+            If no error occurs, this function returns number of bytes sended.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>      
+        </member>
+        <member name="M:PrintDriverNet.Printer.RecvFromChannel(PrintDriverNet.Printer.EChannels,System.Byte[],System.Int32)">
+            <summary>
+            This function cause receiveing data from specific channel.
+            </summary>
+            <param name="channel">
+            Value that specify the channel.
+            </param>
+            <param name="buffer">
+            Byte array buffer that receives data.
+            </param>
+            <param name="nBufferSize">
+            Value that specify maximum size of buffer in bytes.
+            </param>
+            <returns>
+            If no error occurs, this function returns number of bytes received.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>      
+        </member>
+        <member name="M:PrintDriverNet.Printer.SetChannel(PrintDriverNet.Printer.EChannels,System.Int32,System.Int32)">
+             <summary>
+             This function cause receiveing data from specific channel.
+             </summary>
+             <param name="channel">
+             Value that specify the channel.
+             </param>
+             <param name="nSpeed">
+             Value that specify channel speed.
+             
+             0 Sets speed to 1200 bps.
+             1 Sets speed to 2400 bps.
+             2 Sets speed to 4800 bps.
+             3 Sets speed to 9600 bps.
+             4 Sets speed to 19200 bps.
+             5 Sets speed to 57600 bps.
+             6 Sets speed to 115200 bps.
+            
+             </param>
+             <param name="nFlowControl">
+             Value that specify channel flow control type.
+             
+             0 Sets no flow control.
+             1 Sets XON/XOFF flow control.
+             2 Sets RTS/CTR flow control.
+             
+             </param>
+             <returns>
+             If no error occurs, this function returns PRINTER_ENONE.
+             If an error occurs, a negative value is returned. The particular 
+             return value depends on the type of error.
+             </returns>      
+        </member>
+        <member name="M:PrintDriverNet.Printer.GPS_ReceiveNMEA(System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            This function receive NMEA message.
+            </summary>
+            <param name="nTimeout">
+            Value that specify timeout of operation. 
+            </param>
+            <param name="buffer">
+            Byte array buffer that receives message data.
+            </param>
+            <param name="nBufferSize">
+            Value that specify the size of buffer in bytes.
+            </param>
+            <returns>
+            The return value is bytes that was successfully received
+            from GPS module if there are no errors and negative value 
+            if there is an error. The particular return value depends 
+            on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.UniversalReader_GetStatus(PrintDriverNet.Printer.EChannels,System.Int32@,System.Int32@)">
+            <summary>
+            This function returns status bytes of univarsal reader.
+            </summary>
+            <param name="channel">
+            Value that specify requested channel.
+            </param>
+            <param name="nStatus1">
+            Variable that receive status 1.
+            </param>
+            <param name="nStatus2">
+            Variable that receive status 2.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.UniversalReader_ReadIdentification(PrintDriverNet.Printer.EChannels,System.Byte[],System.Int32)">
+            <summary>
+            This function receives identification string of universal reader.
+            </summary>
+            <param name="channel">
+            Value that specify requested channel.
+            </param>
+            <param name="buffer">
+            Byte array buffer that receive identification string. It's size may vary depends of device.
+            </param>
+            <param name="nBufferSize">
+            Value that specify size of buffer in bytes. 
+            </param>
+            <returns>
+            The return value is bytes that was successfully received from universal 
+            reader if there are no errors and negative value if there is an error. 
+            The particular return value depends on the type of error.
+            </returns>
+            <remarks>
+            Data in range [0 .. 21] contains smart card reader name.
+            Data in range [22 .. 26] contains firmware version.
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.SCR_PowerOff">
+            <summary>
+            This function cause power down of smart card reader.
+            </summary>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.SCR_PowerOn">
+            <summary>
+            This function cause power on of smart card reader.
+            </summary>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.SCR_IsCardAvailable(System.Boolean@)">
+            <summary>
+            This function check if there is card available in reader.
+            </summary>
+            <param name="bPresent">
+            Variable that receive card availability.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.SCR_SetCardType(PrintDriverNet.Printer.ESmartCardTypes)">
+            <summary>
+            This function set card type.
+            </summary>
+            <param name="type">
+            Value that specify card type.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.SCR_SetCardSlotType(PrintDriverNet.Printer.ESmartCardReaderSlotTypes)">
+            <summary>
+            This function set card slot type.
+            </summary>
+            <param name="slotType">
+            Value that specify slot type.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.SCR_MCU_Reset(System.Byte[],System.Int32)">
+            <summary>
+            This function cause smart card reset.
+            </summary>
+            <param name="buffer">
+            Byte array buffer that receives data after smart card reset.
+            </param>
+            <param name="nBufferSize">
+            Value that specify the size of buffer in bytes.
+            </param>
+            <returns>
+            The return value is bytes that was successfully received
+            from smart card reader if there are no errors and negative 
+            value if there is an error. The particular return value depends 
+            on the type of error. 
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.SCR_MCU_ADPU_OUT(System.Byte[],System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            This function cause execution of smart card ADPU OUT command.
+            </summary>
+            <param name="datain">
+            Byte array buffer that contains command data to be send to smart card.
+            </param>
+            <param name="nDataInSize">
+            Value that specify the size of command data in bytes.
+            </param>
+            <param name="dataout">
+            Byte array buffer that receives data after command execution.
+            </param>
+            <param name="nDataOutSize">
+            Value that specify the size of buffer in bytes.
+            </param>
+            <returns>
+            The return value is bytes that was successfully received
+            from smart card reader if there are no errors and negative 
+            value if there is an error. The particular return value depends 
+            on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.SCR_MCU_ADPU_IN(System.Byte[],System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            This function cause execution of smart card ADPU IN command.
+            </summary>
+            <param name="datain">
+            Byte array buffer that contains command data to be send to smart card.
+            </param>
+            <param name="nDataInSize">
+            Value that specify the size of command data in bytes.
+            </param>
+            <param name="dataout">
+            Byte array buffer that receives data after command execution.
+            </param>
+            <param name="nDataOutSize">
+            Value that specify the size of buffer in bytes.
+            </param>
+            <returns>
+            The return value is bytes that was successfully received
+            from smart card reader if there are no errors and negative 
+            value if there is an error. The particular return value depends 
+            on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.SCR_MCU_C_ADPU(System.Byte[],System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            This function cause execution of smart card C ADPU command.
+            </summary>
+            <param name="datain">
+            Byte array buffer that contains command data to be send to smart card.
+            </param>
+            <param name="nDataInSize">
+            Value that specify the size of command data in bytes.
+            </param>
+            <param name="dataout">
+            Byte array buffer that receives data after command execution.
+            </param>
+            <param name="nDataOutSize">
+            Value that specify the size of buffer in bytes.
+            </param>
+            <returns>
+            The return value is bytes that was successfully received
+            from smart card reader if there are no errors and negative 
+            value if there is an error. The particular return value depends 
+            on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Mifare_PowerOn">
+            <summary>
+            This function cause power on of mifare card reader. 
+            </summary>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Mifare_PowerOff">
+            <summary>
+            This function cause power down of mifare card reader.
+            </summary>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Mifare_Config(System.Byte@)">
+            <summary>
+            This function configure mifare card reader.
+            </summary>
+            <param name="cStatus">
+            Variable that receives status from function execution.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Mifare_Request(PrintDriverNet.Printer.EMifareRequestType,System.Byte@,System.Byte@,System.Byte@)">
+            <summary>
+            This function cause request for mifare card.
+            </summary>
+            <param name="requestType">
+            Value that specify request type.
+            </param>
+            <param name="cStatus">
+            Variable that receives status from function execution.
+            </param>
+            <param name="cRq1">
+            Variable that receives RQ1. 
+            </param>
+            <param name="cRq2">
+            Variable that receives RQ2. 
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Mifare_Anticollision(System.Byte@,System.UInt32@)">
+            <summary>
+            This function cause anticollision for mifare card.
+            </summary>
+            <param name="cStatus">
+            Variable that receives status from function execution.
+            </param>
+            <param name="nSerialNumber">
+            Variable that receives mifare card serial number.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Mifare_SelectCard(System.UInt32,System.Byte@,System.Byte@)">
+            <summary>
+            This function cause selection of mifare card.
+            </summary>
+            <param name="nSerialNumber">
+            Value that specify mifare card serial number.
+            </param>
+            <param name="cStatus">
+            Variable that receives status from function execution.
+            </param>
+            <param name="cSAck">
+            Variable that receives SACK value.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Mifare_AuthByKey(System.UInt32,PrintDriverNet.Printer.EMifareKeyType,System.Int32,System.Byte[],System.Byte@)">
+            <summary>
+            This function authenticate block with direct supplied key.
+            </summary>
+            <param name="nSerialNumber">
+            Value that specify mifare card serial number.
+            </param>
+            <param name="keyType">
+            Value that specify authentication key type.
+            </param>
+            <param name="nBlockNumber">
+            Value that specify requested block number for authentication.
+            </param>
+            <param name="key">
+            Byte array buffer that contains the six bytes authentication key.
+            </param>
+            <param name="cStatus">
+            Variable that receives status from function execution.  
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Mifare_Read(System.Int32,System.Byte@,System.Byte[])">
+            <summary>
+            This function read data from mifare card block.
+            </summary>
+            <param name="nBlockNumber">
+            Value that specify mifare card block number.
+            </param>
+            <param name="cStatus">
+            Variable that receives status from function execution.
+            </param>
+            <param name="buffer">
+            Byte array buffer that receives 16 bytes data.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Mifare_Write(System.Int32,System.Byte[],System.Byte@)">
+            <summary>
+            This function write data to mifare card block.
+            </summary>
+            <param name="nBlockNumber">
+            Value that specify mifare card block number
+            </param>
+            <param name="buffer">
+            Byte array buffer that contains 16 bytes data to write.
+            </param>
+            <param name="cStatus">
+            Variable that receives status from function execution.  
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Mifare_ValueIncrement(System.Int32,System.Int32,System.Int32,System.Byte@)">
+            <summary>
+            This function increment value in mifare card.
+            </summary>
+            <param name="nSrcBlockNumber">
+            Value that specify source block number.
+            </param>
+            <param name="nDstBlockNumber">
+            Value that specify destination block number.
+            </param>
+            <param name="nValue">
+            Specify increment value.
+            </param>
+            <param name="cStatus">
+            Variable that receives status from function execution.  
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Mifare_ValueDecrement(System.Int32,System.Int32,System.Int32,System.Byte@)">
+            <summary>
+            This function decrement value in mifare card.
+            </summary>
+            <param name="nSrcBlockNumber">
+            Value that specify source block number.
+            </param>
+            <param name="nDstBlockNumber">
+            Value that specify destination block number.
+            </param>
+            <param name="nValue">
+            Specify decrement value.
+            </param>
+            <param name="cStatus">
+            Variable that receives status from function execution.  
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Mifare_ValueRestore(System.Int32,System.Int32,System.Int32,System.Byte@)">
+            <summary>
+            This function restore value in mifare card.
+            </summary>
+            <param name="nSrcBlockNumber">
+            Value that specify source block number.
+            </param>
+            <param name="nDstBlockNumber">
+            Value that specify destination block number.
+            </param>
+            <param name="nValue">
+            Specify restore value.
+            </param>
+            <param name="cStatus">
+            Variable that receives status from function execution.  
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Mifare_Halt(System.Byte@)">
+            <summary>
+            This function cause halt of mifare card.
+            </summary>
+            <param name="cStatus">
+            Variable that receives status from function execution.  
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Mifare_GetSerial(System.Byte@,System.UInt32@)">
+            <summary>
+            This function get mifare module serial number.
+            </summary>
+            <param name="cStatus">
+            Variable that receives status from function execution. 
+            </param>
+            <param name="nSerialNumber">
+            Variable that receives module serial number.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Mifare_WriteEEPROM(System.Int32,System.Byte[],System.Int32,System.Byte@)">
+            <summary>
+            This function write data in EEPROM of mifare module.
+            </summary>
+            <param name="nAddress">
+            Value that specify EEPROM address.
+            </param>
+            <param name="buffer">
+            Byte array buffer that constains data to be write.
+            </param>
+            <param name="nBufferSize">
+            Value that specify the size in bytes of data to be write.
+            </param>
+            <param name="cStatus">
+            Variable that receives status from function execution.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Mifare_WriteValue(System.Int32,System.Int32,System.Byte@)">
+            <summary>
+            This function write four bytes data to mifare card block.
+            </summary>
+            <param name="nBlockNumber">
+            Value that specify block number.
+            </param>
+            <param name="nValue">
+            Specify value to be write.
+            </param>
+            <param name="cStatus">
+            Variable that receives status from function execution.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Mifare_LoadKey(System.Int32,System.Byte[],System.Byte@)">
+            <summary>
+            This function load key into mifare card reader memory.
+            </summary>
+            <param name="nSelector">
+            Value that specify selector. Selector is a position in memory.
+            </param>
+            <param name="key">
+            Byte array buffer that contains six bytes key.
+            </param>
+            <param name="cStatus">
+            Variable that receives status from function execution.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Mifare_AuthByEEPROM(PrintDriverNet.Printer.EMifareKeyType,System.UInt32,System.Int32,System.Int32,System.Byte@)">
+            <summary>
+            This function authenticate mifare card block with key from mifare reader memory.
+            </summary>
+            <param name="keyType">
+            Value that specify authentication key type.
+            </param>
+            <param name="nSerialNumber">
+            Value that specify mifare card serial number.
+            </param>
+            <param name="nSelector">
+            Value that specify selector.
+            </param>
+            <param name="nBlockNumber">
+            Value that specify mifare card block number.
+            </param>        
+            <param name="cStatus">        
+            Variable that receives status from function execution.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular
+            return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.Mifare_ReadEEPROM(System.Int32,System.Byte@,System.Byte[],System.Int32)">
+            <summary>
+            This function read data from mifare reader EEPROM.
+            </summary>
+            <param name="nAddress">
+            Value that specify EEPROM address.
+            </param>
+            <param name="cStatus">
+            Variable that receives status from function execution.  
+            </param>
+            <param name="buffer">
+            Byte array buffer that receives data.
+            </param>
+            <param name="nBufferSize">
+            Value that specify the size of buffer in bytes.
+            </param>
+            <returns>
+            The return value is bytes that was successfully received from mifare 
+            reader EEPROM if there are no errors and negative value if there is 
+            an error. The particular return value depends on the type of error.
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.PageMode_Start">
+            <summary>
+            This function start page mode.
+            </summary>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error. Function may retunrs
+            error and if printer does not support page mode (EFAILED).
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.PageMode_End">
+            <summary>
+            This function returns printer in standart mode.
+            </summary>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error. Function may retunrs
+            error and if printer does not support page mode (EFAILED).
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.PageMode_Print">
+            <summary>
+            This function cause printing of area between the first and last 
+            line containing at least one black point. The content if not 
+            clear so you may print it many times.
+            </summary>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error. Function may retunrs
+            error and if printer does not support page mode (EFAILED).
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.PageMode_GetGlobalArea(PrintDriverNet.Printer.Size@)">
+            <summary>
+            This function returns the maximum printable area size.
+            </summary>
+            <param name="szArea">
+            Receive area size.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error. Function may retunrs
+            error and if printer does not support page mode (EFAILED).
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.PageMode_SetWorkingArea(System.Int32,System.Int32,System.Int32,System.Int32,PrintDriverNet.Printer.EPageModeDirection)">
+            <summary>
+            This function set working area into global page area.
+            </summary>
+            <param name="nX">
+            Specify X position of rectangle.
+            </param>
+            <param name="nY">
+            Specify Y position of rectangle.
+            </param>
+            <param name="nWidth">
+            Specify width of rectangle.
+            </param>
+            <param name="nHeight">
+            Specify height of rectangle.
+            </param>
+            <param name="direction">
+            Specify print direction.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error. Function may retunrs
+            error and if printer does not support page mode (EFAILED).
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.PageMode_SetPosition(System.Int32,System.Int32)">
+            <summary>
+            The function set position in working area.
+            </summary>
+            <param name="nX">
+            Value that specify the absolute horizontal 
+            position for printing.
+            </param>
+            <param name="nY">
+            Value that specify the absolute vertical 
+            position for printing.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error. Function may retunrs
+            error and if printer does not support page mode (EFAILED).
+            </returns>
+            <remarks>
+            Don't you this command right before PDSDK_PrintBitmap. If you need to draw bitmap on the 
+            specific position use PDSDK_PageMode_SetWorkingArea instead.
+            </remarks>
+        </member>
+        <member name="M:PrintDriverNet.Printer.PageMode_FillRectangle(System.Int32,System.Int32,System.Int32,System.Int32,PrintDriverNet.Printer.EPageModeColor)">
+            <summary>
+            The function fill or invert a rectangle in page mode.
+            </summary>
+            <param name="nX">
+            Specify X position of rectangle.
+            </param>
+            <param name="nY">
+            Specify Y position of rectangle.
+            </param>
+            <param name="nWidth">
+            Specify width of rectangle.
+            </param>
+            <param name="nHeight">
+            Specify height of rectangle.
+            </param>
+            <param name="color">
+            Specify color mode.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error. Function may retunrs
+            error and if printer does not support page mode (EFAILED).
+            </returns>
+        </member>
+        <member name="M:PrintDriverNet.Printer.PageMode_RectangleFrame(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,PrintDriverNet.Printer.EPageModeColor)">
+            <summary>
+            Draw frame
+            </summary>        
+            <param name="nX">
+            Specify X position of frame.
+            </param>
+            <param name="nY">
+            Specify Y position of frame.
+            </param>
+            <param name="nWidth">
+            Specify width of frame.
+            </param>
+            <param name="nHeight">
+            Specify height of frame.
+            </param>
+            <param name="nPixels">
+            Specify border width in pixels.
+            </param>
+            <param name="color">
+            Specify color mode.
+            </param>
+            <returns>
+            If no error occurs, this function returns ENONE.
+            If an error occurs, a negative value is returned. The particular 
+            return value depends on the type of error. Function may retunrs
+            error and if printer does not support page mode (EFAILED).
+            </returns>
+        </member>
+        <member name="P:PrintDriverNet.Printer.LibraryVersion">
+            <summary>                
+            The LibraryVersion is an integer with the value 
+            (X*100000 + Y*1000 + Z). For example, for version "2.0.1", 
+            LibraryVersion is set to 2000001. To detect if they are using 
+            version 2.0.1 or greater at compile time, programs may use the test 
+            (LibraryVersion >= 2000001).        
+            </summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.nativePrinterSettings">
+            <summary>
+            Printer settings structure.
+            </summary>  
+        </member>
+        <member name="T:PrintDriverNet.Printer.nativePrintBarcodeParams">
+            <summary>
+            Printed barcode parameters structure.
+            </summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.Size">
+            <summary>Represent Windows GDI SIZE structure that 
+            specifies the width and height of a rectangle.
+            </summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.Size.cx">
+            <summary>Specifies the rectangle's width.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.Size.cy">
+            <summary>Specifies the rectangle's height.</summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.EDeviceTypes">
+            <summary>Specify printer device types.</summary>   
+        </member>
+        <member name="F:PrintDriverNet.Printer.EDeviceTypes.DATECS_PP50">
+            <summary>Datecs PP50.</summary>   
+        </member>
+        <member name="F:PrintDriverNet.Printer.EDeviceTypes.DATECS_PP55">
+            <summary>Datecs PP55.</summary>   
+        </member>
+        <member name="F:PrintDriverNet.Printer.EDeviceTypes.DATECS_DPP350">
+            <summary>Datecs DPP350.</summary>   
+        </member>
+        <member name="F:PrintDriverNet.Printer.EDeviceTypes.CITIZEN_CMP10">
+            <summary>Citizen CMP10.</summary>   
+        </member>
+        <member name="F:PrintDriverNet.Printer.EDeviceTypes.DATECS_DPP250">
+            <summary>Datecs DPP250.</summary>   
+        </member>
+        <member name="F:PrintDriverNet.Printer.EDeviceTypes.DATECS_PP60">
+            <summary>Datecs PP60.</summary>   
+        </member>
+        <member name="F:PrintDriverNet.Printer.EDeviceTypes.SANEI_BL112">
+            <summary>Sanei BL-112.</summary>   
+        </member>
+        <member name="F:PrintDriverNet.Printer.EDeviceTypes.DATECS_EP60">
+            <summary>Datecs EP60.</summary>   
+        </member>
+        <member name="T:PrintDriverNet.Printer.EDeviceModes">
+            <summary>Printer modes.</summary>        
+        </member>
+        <member name="F:PrintDriverNet.Printer.EDeviceModes.Raw">
+            <summary>Printer raw mode.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EDeviceModes.Protocol">
+            <summary>Printer protocol mode.</summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.EIntensity">
+            <summary>Specify intensity levels of printed output.</summary>            
+        </member>
+        <member name="F:PrintDriverNet.Printer.EIntensity.Intesity_70">
+            <summary>70%.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EIntensity.Intesity_80">
+            <summary>80%.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EIntensity.Intesity_90">
+            <summary>90%.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EIntensity.Intesity_100">
+            <summary>100%.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EIntensity.Intesity_120">
+            <summary>120%.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EIntensity.Intesity_150">
+            <summary>150%.</summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.EPrintLogo">
+            <summary>Specify printed logo position.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EPrintLogo.None">
+            <summary>No print logo.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EPrintLogo.Top">
+            <summary>Print logo on start document.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EPrintLogo.Bottom">
+            <summary>Print logo on end document.</summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.PrinterSettings">
+            <summary>Printer settings structure.</summary>  
+        </member>
+        <member name="F:PrintDriverNet.Printer.PrinterSettings.eType">
+            <summary>Specify printer device type.</summary>   
+        </member>
+        <member name="F:PrintDriverNet.Printer.PrinterSettings.eMode">
+            <summary>Printer mode.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PrinterSettings.bDithering">
+            <summary>Dithering applied over image.</summary>
+            <remarks>
+            Next settings are usable when print graphics 
+            via PDSDK_StartPage and PDSDK_EndPage.
+            </remarks>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PrinterSettings.nBrightness">
+            <summary>Brightness value in percent from 0 to 100%.</summary>
+            <remarks>
+            Next settings are usable when print graphics 
+            via PDSDK_StartPage and PDSDK_EndPage.
+            </remarks>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PrinterSettings.nContrast">
+            <summary>Contrast value in percent from 0 to 100%.</summary>
+            <remarks>
+            Next settings are usable when print graphics 
+            via PDSDK_StartPage and PDSDK_EndPage.
+            </remarks>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PrinterSettings.eIntensity">
+            <summary>Intensity level.</summary>            
+        </member>
+        <member name="F:PrintDriverNet.Printer.PrinterSettings.ePrintLogo">
+            <summary>Print logo position.</summary>
+            <remarks>
+            Next settings are usable when print graphics 
+            via PDSDK_StartPage and PDSDK_EndPage.
+            </remarks>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PrinterSettings.bPrintWholePage">
+            <summary>
+            Print whole graphics page with white space at the end 
+            of printer page size.
+            </summary>
+            <remarks>
+            Next settings are usable when print graphics 
+            via PDSDK_StartPage and PDSDK_EndPage.
+            </remarks>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PrinterSettings.nFeedAfterPrint">
+            <summary>
+            Feed paper with n lines after end document. If value is 0 then paper is 
+            feed from printer head to the cutter.
+            </summary>
+            <remarks>
+            Next settings are usable when print graphics 
+            via PDSDK_StartPage and PDSDK_EndPage.            
+            </remarks>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PrinterSettings.bShowProgress">
+            <summary>Show progress cursor while works with printer.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PrinterSettings.nLogLevel">
+            <summary>Log level from 0 to 7. Higher is more verbose.</summary>
+            <remarks>Log file can be located into "\Temp" directory.</remarks>
+        </member>
+        <member name="T:PrintDriverNet.Printer.BthInfoData">
+            <summary>        
+            Bluetooth device information data. 
+            </summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.BthInfoData.strAddress">
+            <summary>Device address in format XX:XX:XX:XX:XX:XX.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.BthInfoData.strName">
+            <summary>Device name.</summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.PaymentCard">
+            <summary>Payment card structure.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PaymentCard.strCardNumber">
+            <summary>Number of payment card.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PaymentCard.strCardName">
+            <summary>Name of payment card holder.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PaymentCard.nExpMonth">
+            <summary>Expiration date - Month.</summary>           
+        </member>
+        <member name="F:PrintDriverNet.Printer.PaymentCard.nExpYear">
+            <summary>Expiration date - Year.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PaymentCard.strTrack1">
+            <summary>Data of first track.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PaymentCard.strTrack2">
+            <summary>Data second track.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PaymentCard.strTrack3">
+            <summary>Data of third track.</summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.EBarcodeType">
+            <summary>Represent printed barcode types.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeType.UPCA">
+            <summary>Barcode type.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeType.UPCE">
+            <summary>Barcode type.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeType.EAN13">
+            <summary>Barcode type.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeType.EAN8">
+            <summary>Barcode type.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeType.CODE39">
+            <summary>Barcode type.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeType.ITF">
+            <summary>Barcode type.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeType.CODABAR">
+            <summary>Barcode type.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeType.CODE93">
+            <summary>Barcode type.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeType.CODE128">
+            <summary>Barcode type.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeType.PDF417">
+            <summary>Barcode type.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeType.CODE128AUTO">
+            <summary>Barcode type.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeType.EAN128AUTO">
+            <summary>Barcode type.</summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.EBarcodeTextPos">
+            <summary>Define printed barcode text positions.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeTextPos.No">
+            <summary>No text printed.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeTextPos.Above">
+            <summary>Text is above barcode.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeTextPos.Below">
+            <summary>Text is below barcode.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeTextPos.Both">
+            <summary>Text is above and below barcode.</summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.EBarcodeTextFont">
+            <summary>Define printed barcode text fonts.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeTextFont.FONTA">
+            <summary>Large font size.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeTextFont.FONTB">
+            <summary>Small font size.</summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.EBarcodeTextAlign">
+            <summary>Define printed barcode text aligns.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeTextAlign.Left">
+            <summary>Text is left align.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeTextAlign.Center">
+            <summary>Text is center align.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeTextAlign.Right">
+            <summary>Text is right align.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeTextAlign.LeftVert">
+            <summary>Text is left vartical align.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeTextAlign.CenterVert">
+            <summary>Text is vertical center align.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EBarcodeTextAlign.RightVert">
+            <summary>Text is vertical right align.</summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.PrintBarcodeParams">
+            <summary>Printed barcode parameters structure.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PrintBarcodeParams.eType">
+            <summary>Barcode type.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PrintBarcodeParams.nHorzSize">
+            <summary>Barcode horizontal size.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PrintBarcodeParams.nHeight">
+            <summary>Barcode height.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PrintBarcodeParams.eTextPosition">
+            <summary>Barcode text position.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PrintBarcodeParams.eTextFont">
+            <summary>Barcode text font.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.PrintBarcodeParams.eTextAlign">
+            <summary>Barcode text align.</summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.ELogoParams">
+            <summary>Specify view of printed logo.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ELogoParams.Normal">
+            <summary>Print logo with normal dimentions.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ELogoParams.DoubleWide">
+            <summary>Print logo with double wide dimentions.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ELogoParams.DoubleHigh">
+            <summary>Print logo with double high dimentions.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ELogoParams.DoubleBoth">
+            <summary>Print logo with double wide and high dimentions.</summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.ECodeTable">
+            <summary>
+            Code table
+            </summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.ENGLISH">
+            <summary>ENGLISH (437)</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.LATIN1">
+            <summary>LATIN 1 (850)</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.PORTUGUESE">
+            <summary>PORTUGUESE (860)</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.LITHUANIAN">
+            <summary>LITHUANIAN</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.LATIN2">
+            <summary>LATIN 2 (852)</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.POLISH">
+            <summary>POLISH</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.TURKISH857">
+            <summary>TURKISH (857)</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.BALTIC775">
+            <summary>BALTIC (775)</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.BULGARIAN">
+            <summary>BULGARIAN (856)</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.RUSSIAN">
+            <summary>RUSSIAN (866)</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.LATVIAN">
+            <summary>LATVIAN</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.GREEK737">
+            <summary>GREEK (737)</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.HEBREW862">
+            <summary>HEBREW (862)</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.WESTERN">
+            <summary>WESTERN (1252)</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.CE">
+            <summary>CE (1250)</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.TURKISH1254">
+            <summary>TURKISH (1254)</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.BALTIC1257">
+            <summary>BALTIC (1257)</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.CYRILLIC">
+            <summary>CYRILLIC (1251)</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.GREEK1253">
+            <summary>GREEK (1253)</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.HEBREW1255">
+            <summary>HEBREW (1255)</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.KATAKANA">
+            <summary>KATAKANA</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.ARABIC1">
+            <summary>ARABIC</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.ARABIC2">
+            <summary>ARABIC (1256)</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.ARABIC3">
+            <summary>ARABIC (1256 with Arabic digits and punctuation)</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ECodeTable.ARABIC4">
+            <summary>ARABIC (1256 with Farsi Arabic digits and punctuation)</summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.EChannels">
+            <summary>Represent printer channels.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EChannels.Printer">
+            <summary>Default channel.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EChannels.Smartcard">
+            <summary>Smart card reader channel.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EChannels.GPRSModem">
+            <summary>GPRS modem channel.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EChannels.Mifare">
+            <summary>Mifare card reader channel.</summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.ESmartCardTypes">
+            <summary>Specify smart card types.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ESmartCardTypes.MCU">
+            <summary>MCU card.</summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.ESmartCardReaderSlotTypes">
+            <summary>Specify smart card reader slot types.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ESmartCardReaderSlotTypes.MCU">
+            <summary>MCU card module.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.ESmartCardReaderSlotTypes.SAM">
+            <summary>SAM card module.</summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.EMifareRequestType">
+            <summary>Define mifare card reader request types.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EMifareRequestType.IdleCards">
+            <summary>Idle cards.</summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EMifareRequestType.AllCards">
+            <summary>All cards.</summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.EMifareKeyType">
+            <summary>Define mifare authentication key types.</summary>        
+        </member>
+        <member name="F:PrintDriverNet.Printer.EMifareKeyType.KEYA">
+            <summary>Key A.</summary>        
+        </member>
+        <member name="F:PrintDriverNet.Printer.EMifareKeyType.KEYB">
+            <summary>Key B.</summary>        
+        </member>
+        <member name="T:PrintDriverNet.Printer.EPageModeDirection">
+            <summary>
+            Page mode directions.
+            </summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EPageModeDirection.LeftTopRightBottom">
+            <summary>
+            Printing from left to right, feed to bottom. Starting point in left top corner of the page.
+            </summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EPageModeDirection.LeftBottomRightTop">
+            <summary>
+            Printing from bottom to top, feed to right. Starting point in left bottom corner of the page.
+            </summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EPageModeDirection.RightBottomLeftTop">
+            <summary>
+            Printing from right to left, feed to top. Starting point in right bottom corner of the page.
+            </summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EPageModeDirection.RightTopLeftBottom">
+            <summary>
+            Printing from top to bottom, feed to left. Starting point in right top corner of the page.
+            </summary>
+        </member>
+        <member name="T:PrintDriverNet.Printer.EPageModeColor">
+            <summary>
+            Page mode color modes.
+            </summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EPageModeColor.White">
+            <summary>
+            White.
+            </summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EPageModeColor.Black">
+            <summary>
+            Black.
+            </summary>
+        </member>
+        <member name="F:PrintDriverNet.Printer.EPageModeColor.Inverse">
+            <summary>
+            Inverse color.
+            </summary>
+        </member>
+    </members>
+</doc>
